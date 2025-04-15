@@ -1,0 +1,13 @@
+services:
+  stardew:
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3001:3001"
+    container_name: stardew
+    volumes:
+      - saves:/config/.config/StardewValley/Saves
+volumes:
+  saves:
