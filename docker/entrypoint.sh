@@ -33,14 +33,18 @@ configure_mods() {
 
 tail_smapi() {
   local smapi_logs="/config/.config/StardewValley/ErrorLogs/SMAPI-latest.txt"
-  
-  while [[ ! -f $smapi_logs ]] || [[ -z $(cat $smapi_logs) ]]; do
+
+  while [[ ! -f "$smapi_logs" ]] || [[ -z $(cat $smapi_logs) ]]; do
     echo "SMAPI logs are not yet here. waiting 3 seconds..."
     sleep 3s
   done
 
   tail -f $smapi_logs
 }
+
+#configure_mods() {
+#  # TO DO
+#}
 
 # Function to launch Stardew Valley
 launch_stardew() {
@@ -51,10 +55,13 @@ launch_stardew() {
 
 # Main script execution
 echo "Starting the Stardew Valley server instance for the first time..."
-configure_mods
+#configure_mods
 
 echo "Starting to follow the SMAPI logs..."
 tail_smapi &
+
+echo "Configuring Mods"
+#configure_mods
 
 echo "Launching Stardew Valley..."
 launch_stardew
