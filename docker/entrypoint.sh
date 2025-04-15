@@ -53,6 +53,8 @@ launch_stardew() {
   stardew_valley_pid=$!
 }
 
+ln -sv /config/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
+
 # Main script execution
 echo "Starting the Stardew Valley server instance for the first time..."
 #configure_mods

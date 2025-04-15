@@ -23,6 +23,8 @@ RUN curl -L -o ./packages-microsoft-prod.deb https://packages.microsoft.com/conf
     && apt-get update \
     && apt-get install -y dotnet-sdk-9.0
 
+RUN apt-get upgrade -y
+
 COPY ./docker/latest.tar.gz /tmp
 # RUN curl -o /tmp/latest.tar.gz https://eris.cc/Stardew_1.6.15.tar.gz \
 RUN tar zxf /tmp/latest.tar.gz -C /data \
@@ -38,12 +40,13 @@ COPY ./mods /data/stardewvalley/Mods
 
 WORKDIR /data
 
+COPY ./docker/autoload_config.json /config/autoload/config.json
+
 # Make the default i3 message go away for a clean startup.
 COPY ./scripts/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
 
 # Place the entrypoint which actually starts Stardew Valley!
 COPY ./docker/entrypoint.sh /custom-cont-init.d/99-entrypoint.sh
 
+VOLUME /config/autoload
 VOLUME /config/.config/StardewValley/Saves
-
-RUN apt-get upgrade -y
