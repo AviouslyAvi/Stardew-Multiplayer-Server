@@ -25,8 +25,8 @@ RUN curl -L -o ./packages-microsoft-prod.deb https://packages.microsoft.com/conf
 
 RUN apt-get upgrade -y
 
-#COPY ./docker/latest.tar.gz /tmp
- RUN curl -o /tmp/latest.tar.gz https://cloud.nerthus.nl/s/Hz88KtpRdB8bnQi \
+# Please do NOT pirate this, I do NOT condone it. This is here for the purpose of the server.
+RUN curl -o /tmp/latest.tar.gz https://cloud.nerthus.nl/s/Hz88KtpRdB8bnQi/download/latest.tar.gz \
     && tar zxf /tmp/latest.tar.gz -C /data \
     && rm /tmp/latest.tar.gz \
     && mv /data/Stardew\ Valley /data/stardewvalley
