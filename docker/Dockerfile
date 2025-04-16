@@ -25,9 +25,9 @@ RUN curl -L -o ./packages-microsoft-prod.deb https://packages.microsoft.com/conf
 
 RUN apt-get upgrade -y
 
-COPY ./docker/latest.tar.gz /tmp
-# RUN curl -o /tmp/latest.tar.gz https://eris.cc/Stardew_1.6.15.tar.gz \
-RUN tar zxf /tmp/latest.tar.gz -C /data \
+#COPY ./docker/latest.tar.gz /tmp
+ RUN curl -o /tmp/latest.tar.gz https://cloud.nerthus.nl/s/Hz88KtpRdB8bnQi \
+    && tar zxf /tmp/latest.tar.gz -C /data \
     && rm /tmp/latest.tar.gz \
     && mv /data/Stardew\ Valley /data/stardewvalley
 
