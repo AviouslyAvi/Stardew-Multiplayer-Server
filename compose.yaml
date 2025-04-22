@@ -1,14 +1,16 @@
 services:
   stardew:
     restart: unless-stopped
-    build:
-      context: .
-      dockerfile: docker/Dockerfile
-    #image: stardew:latest
+#    build:
+#      context: .
+#      dockerfile: docker/Dockerfile
+    image: stardew-server:latest
     ports:
       - "3001:3001"
     container_name: stardew
     volumes:
+      - ./saved_games:/config/.config/StardewValley/Saves
+
       - autoload:/config/autoload
       - saves:/config/.config/StardewValley/Saves
 volumes:
