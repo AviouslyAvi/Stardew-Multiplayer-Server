@@ -42,10 +42,6 @@ tail_smapi() {
   tail -f $smapi_logs
 }
 
-#configure_mods() {
-#  # TO DO
-#}
-
 # Function to launch Stardew Valley
 launch_stardew() {
   bash -c "sleep 5s \
@@ -53,12 +49,31 @@ launch_stardew() {
   stardew_valley_pid=$!
 }
 
-ln -sv /config/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
-ln -sv /config/always_on_server/config.json /data/stardewvalley/Mods/Always\ On\ Server/config.json
+if [[ ! -d /config/modconfs/autoload ]]; then
+    echo "Creating Directory: autoload"
+    mkdir -p /config/modconfs/autoload
+fi
+
+if [[ ! -d /config/modconfs/always_on_server ]]; then
+    echo "Creating Directory: always_on_server"
+    mkdir -p /config/modconfs/always_on_server
+fi
+
+if [[ ! -f /config/modconfs/autoload/config.json ]]; then
+    echo "Moving config: autoload"
+    mv /ephemerality/autoload_config.json /config/modconfs/autoload/config.json
+fi
+
+if [[ ! -f /config/modconfs/always_on_server/config.json ]]; then
+    echo "Moving config: always on server"
+    mv /ephemerality/always_on_server_config.json /config/modconfs/always_on_server/config.json
+fi
+
+ln -sv /config/modconfs/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
+ln -sv /config/modconfs/always_on_server/config.json /data/stardewvalley/Mods/Always\ On\ Server/config.json
 
 # Main script execution
 echo "Starting the Stardew Valley server instance for the first time..."
-#configure_mods
 
 echo "Starting to follow the SMAPI logs..."
 tail_smapi &

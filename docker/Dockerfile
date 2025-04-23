@@ -15,7 +15,8 @@ RUN apt-get update \
     && mkdir -p /data/nexus \
     && mkdir -p /custom-cont-init.d \
     && mkdir -p /ephemerality \
-    && mkdir -p /config/always_on_server \
+    && mkdir -p /config/modconfs/always_on_server \
+    && mkdir -p /config/modconfs/autoload \
     && apt-get upgrade -y
 
 # DOTNET SDK
@@ -41,14 +42,15 @@ RUN tar zxf /tmp/latest.tar.gz -C /data \
 # Copy predefined mods
 COPY ./mods /data/stardewvalley/Mods
 
-# Place the entrypoint which actually starts Stardew Valley!
+# Place the entrypoint which actually starts Stardew Valley! And other startup scripts
 COPY ./docker/entrypoint.sh /custom-cont-init.d/99-entrypoint.sh
-
-# Copy assets
 COPY ./assets/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
-COPY ./assets/always_on_server_config.json /config/always_on_server/config.json
 
-VOLUME /config/autoload
+# JSON Configs
+COPY ./assets/always_on_server_config.json /ephemerality/always_on_server_config.json
+COPY ./assets/autoload_config.json /ephemerality/autoload_config.json
+
+VOLUME /config/modconfs
 VOLUME /config/.config/StardewValley/Saves
 
 WORKDIR /data

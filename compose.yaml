@@ -10,8 +10,8 @@ services:
       - "3001:3001/tcp"
       - "24642:24642/udp"
     volumes:
-      - config:/config
-      - saves:/config/.config/StardewValley/Saves
+      - ./config:/config
+      - ./save_games:/config/.config/StardewValley/Saves
 #    deploy:
 #      resources:
 #        reservations:
@@ -19,6 +19,3 @@ services:
 #            - driver: nvidia
 #              count: 1
 #              capabilities: [gpu]
-volumes:
-  config:
-  saves:
