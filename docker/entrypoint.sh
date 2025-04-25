@@ -61,12 +61,12 @@ fi
 
 if [[ ! -f /config/modconfs/autoload/config.json ]]; then
     echo "Moving config: autoload"
-    mv /ephemerality/autoload_config.json /config/modconfs/autoload/config.json
+    mv /tmp/autoload_config.json /config/modconfs/autoload/config.json
 fi
 
 if [[ ! -f /config/modconfs/always_on_server/config.json ]]; then
     echo "Moving config: always on server"
-    mv /ephemerality/always_on_server_config.json /config/modconfs/always_on_server/config.json
+    mv /tmp/always_on_server_config.json /config/modconfs/always_on_server/config.json
 fi
 
 ln -sv /config/modconfs/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json

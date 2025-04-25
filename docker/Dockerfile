@@ -8,13 +8,11 @@ RUN apt-get update \
         xterm \
         curl \
         libstdc++6 \
-        #build-essential \
         libc6 \
         libicu-dev \
         unzip \
     && mkdir -p /data/nexus \
     && mkdir -p /custom-cont-init.d \
-    && mkdir -p /ephemerality \
     && mkdir -p /config/modconfs/always_on_server \
     && mkdir -p /config/modconfs/autoload \
     && apt-get upgrade -y
@@ -24,9 +22,8 @@ RUN curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/inst
     && bash /tmp/dotnet-install.sh --install-dir /usr/local/share/dotnet \
     && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile
 
-# Please do NOT pirate this, I do NOT condone it. This is here for the purpose of the server.
+# You'll need to supply your own Stardew Valley game files, in the followin name: 'latest.tar.gz' or change the following line.
 COPY ./latest.tar.gz /tmp/latest.tar.gz
-#RUN curl -L -o /tmp/latest.tar.gz https://cloud.nerthus.nl/s/Hz88KtpRdB8bnQi/download/latest.tar.gz \
 RUN tar zxf /tmp/latest.tar.gz -C /data \
     && rm /tmp/latest.tar.gz \
     && mv /data/Stardew\ Valley /data/stardewvalley \
@@ -47,8 +44,8 @@ COPY ./docker/entrypoint.sh /custom-cont-init.d/99-entrypoint.sh
 COPY ./assets/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
 
 # JSON Configs
-COPY ./assets/always_on_server_config.json /ephemerality/always_on_server_config.json
-COPY ./assets/autoload_config.json /ephemerality/autoload_config.json
+COPY ./assets/always_on_server_config.json /tmp/always_on_server_config.json
+COPY ./assets/autoload_config.json /tmp/autoload_config.json
 
 VOLUME /config/modconfs
 VOLUME /config/.config/StardewValley/Saves
