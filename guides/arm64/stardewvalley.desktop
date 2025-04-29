@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Stardew Valley
+Description= Stardew Valley through Mono
+Exec=/usr/bin/mono $HOME/Desktop/Stardew\ Valley/StardewValley.exe
+Type=Application
+Categories=Games;
