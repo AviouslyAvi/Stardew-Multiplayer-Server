@@ -16,11 +16,15 @@ The Raspberry Pi 4 runs it fine and dandy, but its not very smooth... even thoug
 
 # Step-by-step guide:
 
+## Automating (most) steps:
+
 All these steps are also done automatically (perhaps with slight modifications) with: https://github.com/DaanSelen/stardew-multiplayer/blob/main/guides/arm64/prepare-raspberry.sh
 You can download this script on Linux:
 ```sh
 curl https://raw.githubusercontent.com/DaanSelen/stardew-multiplayer/refs/heads/main/guides/arm64/prepare-raspberry.sh > ~/Desktop/pi-prepare.sh # This places it on the DE's Desktop.
 ```
+
+## The actual Guide:
 
 Make sure your Raspberry Pi is up to date. You can do this like this:
 
