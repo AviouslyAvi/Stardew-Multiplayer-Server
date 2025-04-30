@@ -65,4 +65,7 @@ echo '''
 echo "[ INFO ] Linking the system ARM64 library directory..."
 ln -sv /lib/aarch64-linux-gnu "/home/${real_user}/Desktop/Stardew Valley/libaarch64"
 
+echo "[ INFO ] Editing the openal configuration file..."
+sed -i 's/^#drivers =/drivers = alsa/' /etc/openal/alsoft.conf
+
 echo "[ FINISH ] All should be ready! Perhaps a reboot is needed."

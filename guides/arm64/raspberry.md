@@ -76,11 +76,18 @@ After these steps, replace the "~/Desktop/Stardew Valley/MonoGame.Framework.dll.
 </configuration>
 ```
 
-For the last step, place a symbolic link inside the Stardew Valley directory.
+For the next step, place a symbolic link inside the Stardew Valley directory.
 
 ```sh
 ln -s /lib/aarch64-linux-gnu ~/Desktop/Stardew\ Valley/libaarch64
 ```
+
+For the last step, to avoid possible openal (audio) errors, do the following.
+
+```sh
+sed -i 's/^#drivers =/drivers = alsa/' /etc/openal/alsoft.conf
+```
+> A reboot might be needed, or a restart of also/openal.
 
 Now you can launch the game with `mono StardewValley.exe`.
 
