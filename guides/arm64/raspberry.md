@@ -5,8 +5,7 @@ Whether you're looking to turn your Pi into a portable farming station or just l
 
 We’ll cover:
 - System requirements and recommended Raspberry Pi models
-- Installing dependencies and emulation options
-- Game performance tips and controller setup
+- Installing dependencies and getting started
 
 Let’s get your digital farm up and running!
 
