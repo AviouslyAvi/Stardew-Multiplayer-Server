@@ -16,6 +16,12 @@ The Raspberry Pi 4 runs it fine and dandy, but its not very smooth... even thoug
 
 # Step-by-step guide:
 
+All these steps are also done automatically (perhaps with slight modifications) with: https://github.com/DaanSelen/stardew-multiplayer/blob/main/guides/arm64/prepare-raspberry.sh
+You can download this script on Linux:
+```sh
+curl https://raw.githubusercontent.com/DaanSelen/stardew-multiplayer/refs/heads/main/guides/arm64/prepare-raspberry.sh > ~/Desktop/pi-prepare.sh # This places it on the DE's Desktop.
+```
+
 Make sure your Raspberry Pi is up to date. You can do this like this:
 
 ```sh
@@ -60,9 +66,9 @@ After these steps, replace the "~/Desktop/Stardew Valley/MonoGame.Framework.dll.
 	<dllmap dll="soft_oal.dll" os="linux" cpu="x86" target="./lib/libopenal.so.1" />
 	<dllmap dll="SDL2.dll" os="linux" cpu="x86-64" target="./lib64/libSDL2-2.0.so.0"/>
 	<dllmap dll="soft_oal.dll" os="linux" cpu="x86-64" target="./lib64/libopenal.so.1" />
-    <dllmap dll="SDL2.dll" os="linux" cpu="armv8" target="./libaarch64/libSDL2-2.0.so.0"/>
-    <dllmap dll="soft_oal.dll" os="linux" cpu="armv8" target="./libaarch64/libopenal.so.1" />
-    <dllmap dll="liblwjgl_lz4" os="linux" cpu="armv8" target="./libaarch64/liblwjgl_lz4.so"/>
+        <dllmap dll="SDL2.dll" os="linux" cpu="armv8" target="./libaarch64/libSDL2-2.0.so.0"/>
+        <dllmap dll="soft_oal.dll" os="linux" cpu="armv8" target="./libaarch64/libopenal.so.1" />
+        <dllmap dll="liblwjgl_lz4" os="linux" cpu="armv8" target="./libaarch64/liblwjgl_lz4.so"/>
 </configuration>
 ```
 
