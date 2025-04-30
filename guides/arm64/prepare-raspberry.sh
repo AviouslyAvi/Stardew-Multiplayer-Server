@@ -12,7 +12,7 @@ else
 fi
 
 echo "[ INFO ] Trying to install Stardew Valley mono dependencies."
-if ! apt install -y mono-complete libopenal1 libsdl2-2.0-0 libsdl2-dev; then
+if ! apt install -y mono-complete libopenal1 libopenal-dev libsdl2-2.0-0 libsdl2-dev; then
     echo "[ ERROR ] Failed to install dependencies."
     exit 1
 fi
