@@ -14,6 +14,8 @@ Getting the game files is arguably the hardest part. I love this game, and I do 
 It is possible to download the files from my server, but I do not condone this for anything else than the host of your server.<br>
 Have fun!
 
+For indication on how to package the game yourself look at this document: [THE DOCUMENT](./guides/packaging.md).
+
 # Building the image:
 
 Once you clone this repository you can build the image using the following command:
