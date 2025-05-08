@@ -5,7 +5,10 @@ These can be found here: https://www.stardewvalley.net/compatibility/
 
 Because I have only been able to get this all working based on the Steam version, here is my guide:
 
-# Set compatibility beta.
+# Set compatibility beta. (ONLY FOR ARM64!)
+
+This section is here, ignore the beta settings for non-arm systems or installations, because if you do that and you eventually run this as a server - then it will not work.<br>
+This guide is mostly for running on ARM64 like a Raspberry Pi 5.
 
 First off, we need Steam on Linux. You can easily do this on a Linux machine or a Virtual machine with Linux.<br>
 An official Debian guide here: https://wiki.debian.org/Steam
