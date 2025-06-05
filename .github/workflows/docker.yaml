@@ -52,6 +52,8 @@ jobs:
         id: docker-scout
         uses: docker/scout-action@v1
         with:
+          dockerhub_user: ${{ secrets.DOCKER_HUB_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           command: cves
           image: local://${{ env.DOCKER_IMAGE }}:latest
           only-severities: critical,high
