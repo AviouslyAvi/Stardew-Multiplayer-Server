@@ -11,14 +11,14 @@ Therefor this project, it tries to modernize the packages with the same function
 # Getting the game files.
 
 Getting the game files is arguably the hardest part. I love this game, and I do recommend buying it for yourself.<br>
-It is possible to download the files from my server, but I do not condone this for anything else than the host of your server.<br>
-Have fun!
+Have fun!<br>
 
-For indication on how to package the game yourself look at this document: [THE DOCUMENT](./guides/packaging.md).
+For indication on how to package the game yourself look at this document: [Packaging Guide](./guides/packaging.md).
 
 # Building the image:
 
-Once you clone this repository you can build the image using the following command:
+Once you clone this repository you can build the image using the following command:<br>
+Note that you need to package the game yourself, als place it with the correct name in the local root of the repo.
 ```sh
 docker build -f docker/Dockerfile . -t stardew-server:latest
 ```
