@@ -10,7 +10,7 @@ env:
   GAMEFILE_NAME: latest.tar.gz
 
 jobs:
-  docker_build:
+  build_scan_test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
