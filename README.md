@@ -1,7 +1,7 @@
-# Stardew Valley Multiplayer Server (Docker)
-
 [![Docker Building Status](https://github.com/DaanSelen/stardew-multiplayer/actions/workflows/docker.yml/badge.svg)](https://github.com/DaanSelen/stardew-multiplayer/actions/workflows/docker.yml)
 [![CodeQL Advanced](https://github.com/DaanSelen/stardew-multiplayer/actions/workflows/codeql.yml/badge.svg)](https://github.com/DaanSelen/stardew-multiplayer/actions/workflows/codeql.yml)
+
+# Stardew Valley Multiplayer Server (Docker)
 
 This container is thanks to:<br>
 https://github.com/printfuck/stardew-multiplayer-docker
