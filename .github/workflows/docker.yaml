@@ -45,8 +45,10 @@ jobs:
           context: .
           file: ./docker/Dockerfile
           push: false
+          load: true
           tags: ${{ env.DOCKER_IMAGE }}:latest
           platforms: linux/amd64
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker Scout
         id: docker-scout
@@ -57,3 +59,4 @@ jobs:
           image: ${{ env.DOCKER_IMAGE }}:latest
           ignore-unchanged: true
           only-severities: critical,high
+          github-token: ${{ secrets.GITHUB_TOKEN }}
