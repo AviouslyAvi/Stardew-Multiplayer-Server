@@ -57,4 +57,3 @@ jobs:
           image: local://${{ env.DOCKER_IMAGE }}:latest
           ignore-unchanged: true
           only-severities: critical,high
-          github-token: ${{ secrets.GITHUB_TOKEN }}
