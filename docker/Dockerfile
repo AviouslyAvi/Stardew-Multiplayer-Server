@@ -1,7 +1,47 @@
-# Base image
-FROM linuxserver/webtop:debian-i3
+# Compile the libstrangle program
+FROM debian:stable-slim AS builder
+
+RUN apt-get update \
+    && apt-get install -y \
+        git make gcc-multilib g++-multilib \
+        libx11-dev mesa-common-dev libc6-dev-i386 \
+    && apt-get clean
+
+WORKDIR /build
+RUN git clone https://gitlab.com/torkel104/libstrangle.git
+WORKDIR /build/libstrangle
+
+RUN make && make install DESTDIR=/compiled
+
+# Unpack Stardew Valley
+FROM debian:stable-slim AS unpacker
+# You'll need to supply your own Stardew Valley game files, in the followin name: 'latest.tar.gz' or change the following line.
 
 ARG SMAPI_VERSION="4.2.1"
+
+RUN apt-get update \
+    && apt-get install -y \
+        curl \
+        unzip \
+        libicu-dev \
+    && apt-get clean
+
+COPY ./latest.tar.gz /tmp/latest.tar.gz
+RUN mkdir -p /game/nexus \
+    && tar zxf /tmp/latest.tar.gz -C /game \
+    && rm /tmp/latest.tar.gz \
+    && mv /game/Stardew\ Valley /game/stardewvalley
+
+RUN curl -L -o /tmp/nexus.zip https://github.com/Pathoschild/SMAPI/releases/download/${SMAPI_VERSION}/SMAPI-${SMAPI_VERSION}-installer.zip \
+    && unzip /tmp/nexus.zip -d /game/nexus \
+    && SMAPI_NO_TERMINAL=true SMAPI_USE_CURRENT_SHELL=true \
+    /bin/bash -c '/game/nexus/SMAPI\ ${SMAPI_VERSION}\ installer/internal/linux/SMAPI.Installer --install --game-path "/game/stardewvalley" <<< "2"' \
+\
+    && curl -L -o /tmp/always_on_server.zip https://github.com/perkmi/Always-On-Server-for-Multiplayer/releases/latest/download/Always.On.Server.zip \
+    && unzip /tmp/always_on_server.zip -d /game/stardewvalley/Mods
+
+# Base image
+FROM linuxserver/webtop:debian-i3 AS main
 
 RUN apt-get update \
     && apt-get install -y \
@@ -10,31 +50,23 @@ RUN apt-get update \
         libstdc++6 \
         libc6 \
         libicu-dev \
-        unzip \
-    && mkdir -p /data/nexus \
+        libx11-6 \
+        libgl1 \
     && mkdir -p /custom-cont-init.d \
     && mkdir -p /config/modconfs/always_on_server \
     && mkdir -p /config/modconfs/autoload \
-    && apt-get upgrade -y
+    && apt-get upgrade -y \
+    && apt-get clean
 
 # DOTNET SDK
 RUN curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/install-scripts/refs/heads/main/src/dotnet-install.sh \
     && bash /tmp/dotnet-install.sh --install-dir /usr/local/share/dotnet \
     && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile
 
-# You'll need to supply your own Stardew Valley game files, in the followin name: 'latest.tar.gz' or change the following line.
-COPY ./latest.tar.gz /tmp/latest.tar.gz
-RUN tar zxf /tmp/latest.tar.gz -C /data \
-    && rm /tmp/latest.tar.gz \
-    && mv /data/Stardew\ Valley /data/stardewvalley \
-\
-    && curl -L -o /tmp/nexus.zip https://github.com/Pathoschild/SMAPI/releases/download/${SMAPI_VERSION}/SMAPI-${SMAPI_VERSION}-installer.zip \
-    && unzip /tmp/nexus.zip -d /data/nexus \
-    && SMAPI_NO_TERMINAL=true SMAPI_USE_CURRENT_SHELL=true \
-    /bin/bash -c '/data/nexus/SMAPI\ ${SMAPI_VERSION}\ installer/internal/linux/SMAPI.Installer --install --game-path "/data/stardewvalley" <<< "2"' \
-\
-    && curl -L -o /tmp/always_on_server.zip https://github.com/perkmi/Always-On-Server-for-Multiplayer/releases/latest/download/Always.On.Server.zip \
-    && unzip /tmp/always_on_server.zip -d /data/stardewvalley/Mods
+COPY --from=unpacker /game /data
+RUN 
+# Copy libstrangle from the builder stage
+COPY --from=builder /compiled/ /
 
 # Copy predefined mods
 COPY ./mods /data/stardewvalley/Mods
