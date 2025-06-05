@@ -55,6 +55,8 @@ jobs:
         if: ${{ github.event_name != 'pull_request' }}
         uses: docker/scout-action@aceeb83b88f2ae54376891227858dda7af647183
         with:
+          dockerhub_user: ${{ secrets.DOCKER_HUB_USERNAME }}
+          dockerhub_password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           command: quickview, cves
           image: local://${{ env.DOCKER_IMAGE }}:latest
           ignore-unchanged: true
