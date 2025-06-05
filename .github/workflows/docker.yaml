@@ -56,7 +56,7 @@ jobs:
         uses: docker/scout-action@aceeb83b88f2ae54376891227858dda7af647183
         with:
           command: quickview, cves
-          image: ${{ env.DOCKER_IMAGE }}:latest
+          image: local://${{ env.DOCKER_IMAGE }}:latest
           ignore-unchanged: true
           only-severities: critical,high
           github-token: ${{ secrets.GITHUB_TOKEN }}
