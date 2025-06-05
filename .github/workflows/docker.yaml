@@ -53,8 +53,6 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: cves
-          dockerhub-user: ${{ secrets.DOCKER_HUB_USERNAME }}
-          dockerhub-password: ${{ secrets.DOCKER_HUB_PASSWORD }}
           image: local://${{ env.DOCKER_IMAGE }}:latest
           only-severities: critical,high
           github-token: ${{ secrets.GITHUB_TOKEN }}
