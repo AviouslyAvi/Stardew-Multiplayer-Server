@@ -1,8 +1,5 @@
 #!/bin/bash
 
-echo "RUNNING AS $(whoami)"
-echo $(env)
-
 # graceful_shutdown and trap SIGTERM should still be at the top
 graceful_shutdown() {
   echo "Received SIGTERM. Cleaning up..."
@@ -17,9 +14,19 @@ trap graceful_shutdown SIGTERM
 # Function to launch Stardew Valley
 launch_stardew() {
   sleep 3s # Give a moment for the display server to be fully ready
+  local retry_count=0
 
-  mangohud --dlsym /data/stardewvalley/StardewValley
-  exit 1
+  for true; do
+    if [[ $retry_count -gt 5 ]]; then
+      echo "Loop detected. Stopping..."
+      exit 1
+    fi
+
+    mangohud --dlsym /data/stardewvalley/StardewValley
+    ((retry_count++))
+    echo "Restart attempt #$retry_count. Stardew Valley crashed or exited. Restarting in 5 seconds..."
+    sleep 3s
+  done
 }
 
 # --- Your existing setup logic ---
