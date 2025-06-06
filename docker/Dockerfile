@@ -1,18 +1,3 @@
-# Compile the libstrangle program
-FROM debian:stable-slim AS builder
-
-RUN apt-get update \
-    && apt-get install -y \
-        git make gcc-multilib g++-multilib \
-        libx11-dev mesa-common-dev libc6-dev-i386 \
-    && apt-get clean
-
-WORKDIR /build
-RUN git clone https://gitlab.com/torkel104/libstrangle.git
-WORKDIR /build/libstrangle
-
-RUN make && make install DESTDIR=/compiled
-
 # Unpack Stardew Valley
 FROM debian:stable-slim AS unpacker
 # You'll need to supply your own Stardew Valley game files, in the followin name: 'latest.tar.gz' or change the following line.
@@ -52,7 +37,9 @@ RUN apt-get update \
         libicu-dev \
         libx11-6 \
         libgl1 \
+        mangohud \
     && mkdir -p /custom-cont-init.d \
+    && mkdir -p /config/.config/MangoHud \
     && mkdir -p /config/modconfs/always_on_server \
     && mkdir -p /config/modconfs/autoload \
     && apt-get upgrade -y \
@@ -64,16 +51,15 @@ RUN curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/inst
     && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile
 
 COPY --from=unpacker /game /data
-RUN 
-# Copy libstrangle from the builder stage
-COPY --from=builder /compiled/ /
+COPY ./assets/MangoHud.conf /tmp/MangoHud.conf
 
 # Copy predefined mods
 COPY ./mods /data/stardewvalley/Mods
 
 # Place the entrypoint which actually starts Stardew Valley! And other startup scripts
-COPY ./docker/entrypoint.sh /custom-cont-init.d/99-entrypoint.sh
 COPY ./assets/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
+COPY ./assets/stardew.sh /custom-cont-init.d/10-stardew.sh
+COPY ./assets/tail-smapi.sh /custom-cont-init.d/20-tail-smapi.sh
 
 # JSON Configs
 COPY ./assets/always_on_server_config.json /tmp/always_on_server_config.json
