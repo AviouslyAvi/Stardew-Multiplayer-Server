@@ -2,13 +2,15 @@ services:
   stardew:
     restart: unless-stopped
     container_name: stardew-server
-    image: stardew-server:latest
-#    build:
-#      context: .
-#      dockerfile: docker/Dockerfile
+    # Make sure your tar'ed and zip'ed gamefiles are present as latest.tar.gz
+    # Look here for a guide: https://github.com/DaanSelen/stardew-multiplayer/blob/main/guides/packaging.md
+    # Status of the server host is viewable at https://<docker-host>:3001/ you can watch fps and cpu usage.
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
     ports:
       - "3001:3001/tcp"
       - "24642:24642/udp"
     volumes:
       - ./config:/config
-      - ./save_games:/config/.config/StardewValley/Saves
+      - ./saved_games:/config/.config/StardewValley/Saves
