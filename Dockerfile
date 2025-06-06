@@ -57,9 +57,9 @@ COPY ./assets/MangoHud.conf /tmp/MangoHud.conf
 COPY ./mods /data/stardewvalley/Mods
 
 # Place the entrypoint which actually starts Stardew Valley! And other startup scripts
-COPY ./assets/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
-COPY ./assets/stardew.sh /custom-cont-init.d/10-stardew.sh
-COPY ./assets/tail-smapi.sh /custom-cont-init.d/20-tail-smapi.sh
+COPY ./scripts/configure-i3.sh /custom-cont-init.d/00-configure-i3.sh
+COPY ./scripts/stardew.sh /custom-cont-init.d/10-stardew.sh
+COPY ./scripts/tail-smapi.sh /custom-cont-init.d/20-tail-smapi.sh
 
 # JSON Configs
 COPY ./assets/always_on_server_config.json /tmp/always_on_server_config.json
