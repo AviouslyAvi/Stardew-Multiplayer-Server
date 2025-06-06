@@ -7,7 +7,7 @@ services:
     # Status of the server host is viewable at https://<docker-host>:3001/ you can watch fps and cpu usage.
     build:
       context: .
-      dockerfile: docker/Dockerfile
+      dockerfile: ./Dockerfile
     ports:
       - "3001:3001/tcp"
       - "24642:24642/udp"
