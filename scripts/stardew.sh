@@ -13,19 +13,21 @@ trap graceful_shutdown SIGTERM
 
 # Function to launch Stardew Valley
 launch_stardew() {
-  sleep 3s # Give a moment for the display server to be fully ready
+  echo "Entering Stardew Launching Function..."
   local retry_count=0
 
   while true; do
+    echo "Sleeping for 5 seconds to give the DE some breathing time..."
+    sleep 3s
     if [[ $retry_count -gt 5 ]]; then
       echo "Loop detected. Stopping..."
       exit 1
     fi
 
+    echo "Executing Stardew/SMAPI Binaries!"
     mangohud --dlsym /data/stardewvalley/StardewValley
     ((retry_count++))
-    echo "Restart attempt #$retry_count. Stardew Valley crashed or exited. Restarting in 5 seconds..."
-    sleep 3s
+    echo "Restart attempt ${retry_count}. Stardew Valley crashed or exited. Restarting..."
   done
 }
 

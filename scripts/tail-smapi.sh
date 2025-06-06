@@ -2,6 +2,8 @@
 
 tail_smapi() {
   local smapi_logs="/config/.config/StardewValley/ErrorLogs/SMAPI-latest.txt"
+  echo "Removing old logs if they exist..."
+  rm $smapi_logs
 
   # Loop until the log file exists and has content
   while [[ ! -f "$smapi_logs" ]] || [[ -z $(cat "$smapi_logs") ]]; do

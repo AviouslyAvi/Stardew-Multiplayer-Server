@@ -8,9 +8,15 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
+    environment:
+      - TZ=Europe/Amsterdam
+      - CUSTOM_USER=stardew
+      - PASSWORD=stardew
+      - TITLE=Stardew Valley Game Server
     ports:
-      - "3001:3001/tcp"
-      - "24642:24642/udp"
+      #- 3000:3000/tcp # Real VNC
+      - 3001:3001/tcp # Web VNC
+      - 24642:24642/udp # Stardew Valley Game Server
     volumes:
       - ./config:/config/modconfs
       - ./saved_games:/config/.config/StardewValley/Saves
