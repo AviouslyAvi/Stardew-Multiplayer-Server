@@ -48,6 +48,10 @@ For GPU support refer to the following docs:<br>
 - https://docs.linuxserver.io/images/docker-webtop/#dri3-gpu-acceleration-kasmvnc-interface
 - https://docs.linuxserver.io/images/docker-webtop/#nvidia-gpu-support-kasmvnc-interface
 
+# RESOURCE USAGE:
+
+![image](https://github.com/user-attachments/assets/1491c0f4-0e5f-4368-a20f-3c2df26af1ba)
+
 # CREDITS:
 
 Inspired by:<br>
