@@ -1,4 +1,4 @@
-#1/bin/bash
+#!/bin/bash
 #
 # To make the default i3 message dissapear copy the file from /etc/i3/config to /config/.config/i3/config
 #

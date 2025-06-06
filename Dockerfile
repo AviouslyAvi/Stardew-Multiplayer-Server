@@ -1,3 +1,10 @@
+FROM alpine:latest AS dotnet-installer
+
+RUN apk add --no-cache \
+        bash curl \
+    && curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/install-scripts/refs/heads/main/src/dotnet-install.sh \
+    && bash /tmp/dotnet-install.sh --install-dir /usr/local/share/dotnet
+
 # Unpack Stardew Valley
 FROM debian:stable-slim AS unpacker
 # You'll need to supply your own Stardew Valley game files, in the followin name: 'latest.tar.gz' or change the following line.
@@ -45,12 +52,8 @@ RUN mkdir -p /custom-cont-init.d \
     && mkdir -p /config/modconfs/always_on_server \
     && mkdir -p /config/modconfs/autoload
 
-RUN apt-get upgrade -y \
-    && curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/install-scripts/refs/heads/main/src/dotnet-install.sh \
-    && bash /tmp/dotnet-install.sh --install-dir /usr/local/share/dotnet \
-    && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile \
-    && apt-get clean \
-    && rm -rf /var/cache/*
+COPY --from=dotnet-installer /usr/local/share/dotnet /usr/local/share/dotnet
+RUN echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile
 
 COPY --from=unpacker /game /data
 COPY ./assets/MangoHud.conf /tmp/MangoHud.conf

@@ -29,7 +29,7 @@ launch_stardew() {
   done
 }
 
-# --- Your existing setup logic ---
+# FIRST-RUNS
 if [[ ! -d /config/modconfs/autoload ]]; then
     echo "Creating Directory: autoload"
     mkdir -p /config/modconfs/autoload
@@ -38,10 +38,6 @@ fi
 if [[ ! -d /config/modconfs/always_on_server ]]; then
     echo "Creating Directory: always_on_server"
     mkdir -p /config/modconfs/always_on_server
-fi
-
-if [[ ! -d /config/.config/MangoHud ]]; then
-    mkdir -p /config/.config/MangoHud
 fi
 
 if [[ ! -f /config/modconfs/autoload/config.json ]]; then
@@ -54,13 +50,17 @@ if [[ ! -f /config/modconfs/always_on_server/config.json ]]; then
     mv /tmp/always_on_server_config.json /config/modconfs/always_on_server/config.json
 fi
 
+# ALWAYS
+if [[ ! -d /config/.config/MangoHud ]]; then
+    mkdir -p /config/.config/MangoHud
+fi
+
 if [[ ! -f /config/.config/MangoHud/MangoHud.conf ]]; then
     mv /tmp/MangoHud.conf /config/.config/MangoHud/MangoHud.conf
 fi
 
 ln -sv /config/modconfs/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
 ln -sv /config/modconfs/always_on_server/config.json /data/stardewvalley/Mods/Always\ On\ Server/config.json
-# --- End of setup logic ---
 
 echo "Starting..."
 
