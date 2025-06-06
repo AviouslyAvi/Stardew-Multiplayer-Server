@@ -8,8 +8,7 @@ RUN apt-get update \
     && apt-get install -y \
         curl \
         unzip \
-        libicu-dev \
-    && apt-get clean
+        libicu-dev
 
 COPY ./latest.tar.gz /tmp/latest.tar.gz
 RUN mkdir -p /game/nexus \
@@ -20,10 +19,12 @@ RUN mkdir -p /game/nexus \
 RUN curl -L -o /tmp/nexus.zip https://github.com/Pathoschild/SMAPI/releases/download/${SMAPI_VERSION}/SMAPI-${SMAPI_VERSION}-installer.zip \
     && unzip /tmp/nexus.zip -d /game/nexus \
     && SMAPI_NO_TERMINAL=true SMAPI_USE_CURRENT_SHELL=true \
-    /bin/bash -c '/game/nexus/SMAPI\ ${SMAPI_VERSION}\ installer/internal/linux/SMAPI.Installer --install --game-path "/game/stardewvalley" <<< "2"' \
-\
-    && curl -L -o /tmp/always_on_server.zip https://github.com/perkmi/Always-On-Server-for-Multiplayer/releases/latest/download/Always.On.Server.zip \
-    && unzip /tmp/always_on_server.zip -d /game/stardewvalley/Mods
+    /bin/bash -c '/game/nexus/SMAPI\ ${SMAPI_VERSION}\ installer/internal/linux/SMAPI.Installer --install --game-path "/game/stardewvalley" <<< "2"'
+
+RUN curl -L -o /tmp/always_on_server.zip https://github.com/perkmi/Always-On-Server-for-Multiplayer/releases/latest/download/Always.On.Server.zip \
+    && unzip /tmp/always_on_server.zip -d /game/stardewvalley/Mods \
+    && apt-get clean \
+    && rm -rf /var/cache/*
 
 # Base image
 FROM linuxserver/webtop:debian-i3 AS main
@@ -37,18 +38,19 @@ RUN apt-get update \
         libicu-dev \
         libx11-6 \
         libgl1 \
-        mangohud \
-    && mkdir -p /custom-cont-init.d \
+        mangohud
+
+RUN mkdir -p /custom-cont-init.d \
     && mkdir -p /config/.config/MangoHud \
     && mkdir -p /config/modconfs/always_on_server \
-    && mkdir -p /config/modconfs/autoload \
-    && apt-get upgrade -y \
-    && apt-get clean
+    && mkdir -p /config/modconfs/autoload
 
-# DOTNET SDK
-RUN curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/install-scripts/refs/heads/main/src/dotnet-install.sh \
+RUN apt-get upgrade -y \
+    && curl -o /tmp/dotnet-install.sh https://raw.githubusercontent.com/dotnet/install-scripts/refs/heads/main/src/dotnet-install.sh \
     && bash /tmp/dotnet-install.sh --install-dir /usr/local/share/dotnet \
-    && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile
+    && echo "export PATH=$PATH:/usr/local/share/dotnet" >> /etc/profile \
+    && apt-get clean \
+    && rm -rf /var/cache/*
 
 COPY --from=unpacker /game /data
 COPY ./assets/MangoHud.conf /tmp/MangoHud.conf
