@@ -19,6 +19,7 @@ launch_stardew() {
   sleep 3s # Give a moment for the display server to be fully ready
 
   mangohud --dlsym /data/stardewvalley/StardewValley
+  exit 1
 }
 
 # --- Your existing setup logic ---
