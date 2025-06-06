@@ -21,7 +21,7 @@ For indication on how to package the game yourself look at this document: [Packa
 Once you clone this repository you can build the image using the following command:<br>
 Note that you need to package the game yourself, als place it with the correct name in the local root of the repo.
 ```sh
-docker build -f docker/Dockerfile . -t stardew-server:latest
+docker build (-f ./Dockerfile) . -t stardew-server:latest
 ```
 If you want to integrate the building directory into the compose, you can use the following:
 ```yaml
