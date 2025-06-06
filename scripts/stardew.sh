@@ -16,7 +16,7 @@ launch_stardew() {
   sleep 3s # Give a moment for the display server to be fully ready
   local retry_count=0
 
-  for true; do
+  while true; do
     if [[ $retry_count -gt 5 ]]; then
       echo "Loop detected. Stopping..."
       exit 1
