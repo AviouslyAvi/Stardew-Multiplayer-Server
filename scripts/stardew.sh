@@ -25,7 +25,7 @@ launch_stardew() {
     fi
 
     echo "Executing Stardew/SMAPI Binaries!"
-    mangohud --dlsym /data/stardewvalley/StardewValley
+    SPDLOG_LEVEL=off mangohud --dlsym /data/stardewvalley/StardewValley
     ((retry_count++))
     echo "Restart attempt ${retry_count}. Stardew Valley crashed or exited. Restarting..."
   done

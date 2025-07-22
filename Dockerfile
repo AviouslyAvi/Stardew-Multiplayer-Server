@@ -45,7 +45,8 @@ RUN apt-get update \
         libicu-dev \
         libx11-6 \
         libgl1 \
-        mangohud
+        mangohud \
+        mesa-utils
 
 RUN mkdir -p /custom-cont-init.d \
     && mkdir -p /config/.config/MangoHud \
