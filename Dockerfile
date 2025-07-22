@@ -70,7 +70,4 @@ COPY ./scripts/tail-smapi.sh /custom-cont-init.d/20-tail-smapi.sh
 COPY ./assets/always_on_server_config.json /tmp/always_on_server_config.json
 COPY ./assets/autoload_config.json /tmp/autoload_config.json
 
-VOLUME /config/modconfs
-VOLUME /config/.config/StardewValley/Saves
-
 WORKDIR /data
