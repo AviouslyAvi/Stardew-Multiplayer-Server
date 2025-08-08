@@ -1,0 +1,6 @@
+AutoLoadGame
+DefaultOnCheats
+MultiUserChests
+NoFenceDecay
+
+I can't distribute these willy nilly, so I either need to get permission or make a manual manual
