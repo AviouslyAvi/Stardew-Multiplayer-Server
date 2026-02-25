@@ -7,6 +7,7 @@
 
 This fork includes Docker-focused helper scripts and publishing docs:
 
+- Simple setup guide (recommended first read): [`QUICKSTART.md`](./QUICKSTART.md)
 - Docker helper scripts (Windows launchers/status/logs): [`tools/StardewServer/README.md`](./tools/StardewServer/README.md)
 
 This fork keeps credit to the upstream project and is intended to be maintained as an Avious customization layer on top of `DaanSelen/stardew-multiplayer`.
