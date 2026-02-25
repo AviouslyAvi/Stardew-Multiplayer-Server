@@ -41,6 +41,3 @@ Credit:
    ```bat
    .\StardewServer\Logs-AviousDockerServer.bat
    ```
-
-## Publishing
-- Use the top-level `GITHUB_UPLOAD_GUIDE.md` for the repo-cleanup and upload steps.
