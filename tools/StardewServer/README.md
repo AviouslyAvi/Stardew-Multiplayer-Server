@@ -27,17 +27,17 @@ Credit:
 ## Daily use
 1. Start/rebuild host:
    ```bat
-   .\StardewServer\Switch-To-DockerHost.bat
+   .\tools\StardewServer\Switch-To-DockerHost.bat
    ```
    Or Steam method:
    ```bat
-   copy .\stardew-multiplayer\.env.steam.example .\stardew-multiplayer\.env.steam
-   .\StardewServer\Switch-To-DockerHost-Steam.bat
+   copy .\.env.steam.example .\.env.steam
+   .\tools\StardewServer\Switch-To-DockerHost-Steam.bat
    ```
 2. Open web VNC:
    - LOCAL: `https://localhost:3101`
    - STEAM: `https://localhost:3201`
 3. View logs if needed:
    ```bat
-   .\StardewServer\Logs-AviousDockerServer.bat
+   .\tools\StardewServer\Logs-AviousDockerServer.bat
    ```

@@ -1,15 +1,13 @@
 @echo off
 setlocal EnableExtensions
 
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..") do set "ROOT=%%~fI"
-set "REPO=%ROOT%\stardew-multiplayer"
+for %%I in ("%~dp0..\..") do set "REPO=%%~fI"
 set "TARBALL=%REPO%\latest.tar.gz"
 
 if not exist "%TARBALL%" (
   echo [ERROR] Missing "%TARBALL%".
   echo [ERROR] This repo does not include Stardew game files.
-  echo [ERROR] Create/provide your own latest.tar.gz from a legally owned copy of Stardew Valley and place it in stardew-multiplayer\.
+  echo [ERROR] Create/provide your own latest.tar.gz from a legally owned copy of Stardew Valley and place it in the repo root next to Dockerfile.
   exit /b 1
 )
 

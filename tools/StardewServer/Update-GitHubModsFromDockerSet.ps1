@@ -9,7 +9,8 @@ $mods = @(
     @{ Folder='TrinketTinker'; Repo='Mushymato/TrinketTinker'; UniqueID='mushymato.TrinketTinker' }
 )
 
-$modsRoot = 'G:\My Drive\Google AI Studio\Codex\stardew-multiplayer\mods'
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$modsRoot = Join-Path (Resolve-Path (Join-Path $scriptDir '..\..')).Path 'mods'
 $tmpRoot = Join-Path $env:TEMP 'sdv-mod-updates'
 New-Item -ItemType Directory -Force -Path $tmpRoot | Out-Null
 

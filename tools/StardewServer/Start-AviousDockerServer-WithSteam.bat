@@ -1,14 +1,12 @@
 @echo off
 setlocal EnableExtensions
 
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..") do set "ROOT=%%~fI"
-set "REPO=%ROOT%\stardew-multiplayer"
+for %%I in ("%~dp0..\..") do set "REPO=%%~fI"
 set "ENVFILE=%REPO%\.env.steam"
 
 if not exist "%ENVFILE%" (
   echo [ERROR] Missing "%ENVFILE%".
-  echo [ERROR] Copy stardew-multiplayer\.env.steam.example to .env.steam and fill in STEAM_USER / STEAM_PASS.
+  echo [ERROR] Copy .env.steam.example to .env.steam in the repo root and fill in STEAM_USER / STEAM_PASS.
   exit /b 1
 )
 

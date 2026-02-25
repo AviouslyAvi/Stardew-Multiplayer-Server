@@ -1,9 +1,7 @@
 @echo off
 setlocal EnableExtensions
 
-set "SCRIPT_DIR=%~dp0"
-for %%I in ("%SCRIPT_DIR%..") do set "ROOT=%%~fI"
-set "REPO=%ROOT%\stardew-multiplayer"
+for %%I in ("%~dp0..\..") do set "REPO=%%~fI"
 set "ENVFILE=%REPO%\.env.steam"
 
 pushd "%REPO%"

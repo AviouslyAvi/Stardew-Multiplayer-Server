@@ -1,9 +1,18 @@
 param(
-    [string]$SourceMods = 'D:\StardewHostInstance\Mods',
-    [string]$TargetMods = 'G:\My Drive\Google AI Studio\Codex\stardew-multiplayer\user_mods'
+    [string]$SourceMods,
+    [string]$TargetMods
 )
 
 $ErrorActionPreference = 'Stop'
+
+$scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
+$repoRoot = (Resolve-Path (Join-Path $scriptDir '..\..')).Path
+if (-not $TargetMods) {
+    $TargetMods = Join-Path $repoRoot 'user_mods'
+}
+if (-not $SourceMods) {
+    throw "Specify -SourceMods <path>. Example: .\tools\StardewServer\Sync-AviousDockerUserMods.ps1 -SourceMods 'D:\StardewHostInstance\Mods'"
+}
 
 if (-not (Test-Path -LiteralPath $SourceMods)) {
     throw "Source mods folder not found: $SourceMods"
