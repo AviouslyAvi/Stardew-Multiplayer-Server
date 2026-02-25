@@ -96,7 +96,9 @@ COPY ./mods /data/stardewvalley/Mods
 
 # Place the entrypoint which actually starts Stardew Valley! And other startup scripts
 COPY ./scripts/stardew.sh /custom-cont-init.d/10-stardew.sh
+COPY ./scripts/merge-external-mods.sh /custom-cont-init.d/05-merge-external-mods.sh
 COPY ./scripts/tail-smapi.sh /custom-cont-init.d/20-tail-smapi.sh
+RUN chmod +x /custom-cont-init.d/*.sh
 
 # JSON Configs
 COPY ./assets/always_on_server_config.json /tmp/always_on_server_config.json

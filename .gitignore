@@ -2,6 +2,10 @@ save*
 *.tar.gz*
 conf*
 !*configure*
+saved_games/
+config/
+user_mods/
+.env.steam
 
 # The mods I cannot directly present
 AutoLoadGame
