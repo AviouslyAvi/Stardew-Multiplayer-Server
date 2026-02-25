@@ -61,8 +61,17 @@ if [[ ! -f /config/.config/MangoHud/MangoHud.conf ]]; then
     mv /tmp/MangoHud.conf /config/.config/MangoHud/MangoHud.conf
 fi
 
-ln -sv /config/modconfs/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
-ln -sv /config/modconfs/always_on_server/config.json /data/stardewvalley/Mods/Always\ On\ Server/config.json
+if [[ -d /data/stardewvalley/Mods/AutoLoadGame ]]; then
+    ln -svf /config/modconfs/autoload/config.json /data/stardewvalley/Mods/AutoLoadGame/config.json
+else
+    echo "AutoLoadGame mod not installed; skipping autoload config symlink."
+fi
+
+if [[ -d "/data/stardewvalley/Mods/Always On Server" ]]; then
+    ln -svf /config/modconfs/always_on_server/config.json /data/stardewvalley/Mods/Always\ On\ Server/config.json
+else
+    echo "Always On Server mod not installed; skipping config symlink."
+fi
 
 echo "Starting..."
 

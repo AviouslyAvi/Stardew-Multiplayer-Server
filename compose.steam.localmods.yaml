@@ -1,0 +1,27 @@
+services:
+  stardew:
+    restart: unless-stopped
+    container_name: stardew-server-steammods
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        METHOD: "STEAM"
+        STEAM_USER: ${STEAM_USER}
+        STEAM_PASS: ${STEAM_PASS}
+    environment:
+      - TZ=America/New_York
+      - CUSTOM_USER=stardew
+      - PASSWORD=stardew
+      - TITLE=Stardew Valley Game Server (Steam Mods)
+    ports:
+      - 3200:3000/tcp
+      - 3201:3001/tcp
+      - 24644:24642/udp
+    volumes:
+      - ./config:/config/modconfs
+      - ./saved_games:/config/.config/StardewValley/Saves
+      - type: bind
+        source: ./mods
+        target: /external-mods
+        read_only: true
