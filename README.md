@@ -3,6 +3,15 @@
 
 # Stardew Valley Multiplayer Server (Docker)
 
+## Avious Fork Additions
+
+This fork includes Docker-focused helper scripts and publishing docs:
+
+- Docker helper scripts (Windows launchers/status/logs): [`tools/StardewServer/README.md`](./tools/StardewServer/README.md)
+- GitHub publishing guide for this fork: [`GITHUB_UPLOAD_GUIDE.md`](./GITHUB_UPLOAD_GUIDE.md)
+
+This fork keeps credit to the upstream project and is intended to be maintained as an Avious customization layer on top of `DaanSelen/stardew-multiplayer`.
+
 The reason I made this adaptation is because I saw that the code in the other repositories are becoming quite old.<br>
 In particular the Debian version, at the moment was 10, which is slowly becoming deprecated.<br>
 But less-efficient code was also one of the factors.<br>
